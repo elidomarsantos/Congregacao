@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<br>
+<div class="container">
+<h3 style="text-align:center;">Registro de Transferência de Fundos (TO-62)</h3>
+<br>
+<div class="row">
+<div class="col-md-12"> 
+  <div class="card">
+    <form method="POST">
+      {% csrf_token %}
+         <div class="card-body" > 
+                 <a id="registro_b"href="/contas/view_gerais_contas" class="btn btn-secondary" role="button" aria-pressed="true">Informações Gerais</a>
+                 <a id="registro_b" href="/contas/contas"  class="btn btn-secondary">Folha de Contas</a>
+                 <a id="registro_b" href="/contas/relatório_mensal" class="btn btn-secondary">Relatório Mensal</a>
+                 <input id="registro_b"type="submit" class="btn btn-info" value="Gerar Registro">
+                 <a id="registro_b" href="{% static 'registro_pronto.pdf' %}"class="btn btn-success" download="TO-62">Download</a>
+             
+               </div> 
+              </form>   
+         {% if messages %}
+         <ul class="messages">
+          {% for message in messages %}
+            <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+           {%  endfor %} 
+          </ul>
+          {% endif %}
+      </div> 
+      </div> 
+ </div>  
+ <div class="row">
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body" id="tabela_relatório">
+         <table>
+       <tbody>
+         <tr>
+             <th >Congregação</th>
+             {% for a in relatório %} 
+             <td style="color:red">{{ a.congregação|default_if_none:"&nbsp;" }}</td>
+             {% endfor %} 
+          </tr> 
+          <tr>
+            <th >Total de Fundos Enviados</th>
+             <td style="color:red">{{ total_enviados|floatformat:2}}</td>
+          </tr>
+    </tbody>
+    </table>
+       </div>
+     </div>
+   </div>
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body" id="tabela_relatório">
+    <table>
+       <tbody>
+        <tr>
+            <th>Obra Mundial (caixas)</th>
+            {% for a in relatório %} 
+            <td style="color:red">{{ total_O|floatformat:2}}</td>
+            {% endfor %} 
+         </tr>
+         <tr>
+          <th>Obra Mundial - Resolução</th>
+          {% for a in relatório %} 
+          <td style="color:red">{{ remessa_betel_resolução|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+       <tr>
+        <th>Renovação de Betel</th>
+        {% for a in relatório %} 
+        <td style="color:red">{{ total_CF|floatformat:2}}</td>
+        {% endfor %} 
+     </tr>
+          </tbody>
+    </table> 
+       </div>
+     </div>
+   </div>
+
+   <div class="row" >
+    <div class="col-sm-6">
+     <div id="field" class="card-body">
+      <form method="GET"> 
+        {% csrf_token %} 
+      <p style="font-size: 13px">Os dados acima são automaticamente preenchidos com o lançado em "Informações Gerais" e na "Folha de Contas". Apenas imediatamente antes de imprimir o relatório, insira as informações adicionais abaixo que sejam pertinentes, e confirma</p>
+     
+          </div>
+         </div>
+    
+    <div class="col-sm-6">
+     <div id="field" class="card-body">
+ 
+           <button type="submit" class="btn btn-primary">Ok</button>
+           <button type="submit" class="btn btn-danger">Limpar Informações Abaixo</button>
+
+        </div>
+     </div>
+   </div>
+  </div> 
+ <div class="row" >
+    <div class="col-sm-6">
+     <div class="card" >
+   
+
+        <div id="field" class="card-body">
+          <fieldset >
+            <h5>Outras Finalidades</h5>
+            <input type="text" size="20" name="finalidades1" placeholder="Informe a Descrição">
+            <td>{{ finalidade1|default_if_none:"&nbsp;" }}</td><br>
+            <input type="number" step="0.01" size="20" name="valor_finalidades1" placeholder="Informe o Valor"> 
+            <td>{{ valor_da_finalidade1|floatformat:2}}</td><br>
+            </fieldset>
+           <br>
+           <fieldset>
+            <input type="text" size="20" name="finalidades2" placeholder="Informe a Descrição">
+            <td>{{ finalidade2|default_if_none:"&nbsp;" }}</td><br>
+            <input type="number" step="0.01" size="20" name="valor_finalidades2" placeholder="Informe o Valor"> 
+            <td>{{ valor_da_finalidade2|floatformat:2 }}</td><br>
+           </fieldset>
+        </div>
+     </div>
+   </div>
+   <div class="col-sm-6">
+    <div id="field" class="card-body">
+            <fieldset >
+            <h5>Data da Transação:</h5>
+            <input type='date' size="30" name="data" placeholder="Informe a Data">
+            <td>{{ data_da_transação|default_if_none:"&nbsp;" }}</td><br>
+            </fieldset>
+         </div>
+          <div id="field" class="card-body">
+           <fieldset >
+           <h5>Número de Confirmação</h5>
+           <input type="text" size="15" name="confirmação" placeholder="Informe o Número">
+           <td>{{ confirmação|default_if_none:"&nbsp;" }}</td><br>
+          
+          </fieldset>
+     </div>
+  </div>
+</div>
+  <div class="row" >
+    <div class="col-sm-6">
+     <div id="field" class="card-body">
+             <fieldset >
+             <h5>Preenchido por</h5>
+             <input type="text" size="20" name="preenchido" placeholder="Informe o Nome">
+             <td>{{ preenchido|default_if_none:"&nbsp;"}} </td><br>
+             </fieldset>
+          </div>
+         </div>
+    
+    <div class="col-sm-6">
+     <div id="field" class="card-body">
+    
+          <fieldset >
+            <h5>Aprovado por</h5>
+            <input type="text" size="20" name="aprovado" placeholder="Informe o Nome">
+            <td>{{ aprovado|default_if_none:"&nbsp;" }}</td><br>
+           
+           </fieldset>
+          </form>
+  
+        </div>
+     </div>
+   </div>
+ 
+
+  </div>
+
+{% endblock %}

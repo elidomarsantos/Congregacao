@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<br>
+<div class="container">
+<h3 style="text-align:center;">Histórico de Designações - Reunião de Meio de Semana</h3>
+<br>
+<div class="row">
+<div class="col-sm-12"> 
+  <div class="card h-100 card-inline-block w-100">
+<form method="GET"> 
+    {% csrf_token %} 
+         <div class="card-body"> 
+              <input class="input col-md-3" type="month" name="data" placeholder="mês" maxlength="11" style="margin: 4% 0% 2% 0%;">
+            <button id='bot' class="btn btn-primary">Pesquisar<br>por Mês</button>
+            <button id='bot' class="btn btn-warning" name="todos">Visualizar <br>Todas</button>
+                </form>
+                <span><a href="/desig_quarta" id='bot' class="btn btn-success">Designar <br>Nova Semana</a></span>
+                <span><a href="{% static 'Designações_Mensal.xlsx' %}" id='bot' class="btn btn-danger" download="designações">Baixar <br>Programação</a></span>
+                <span><a href="/historico_sabado" id='bot' class="btn btn-secondary">Fim de <br>Semana</a></span>
+         </div> 
+         {% if messages %}
+         <ul class="messages">
+          {% for message in messages %}
+            <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+           {%  endfor %} 
+          </ul>
+          {% endif %}
+      </div> 
+      </div> 
+ </div>   
+  <br> 
+  <div class="row">
+ <div class="col-md-12"> 
+    <table class="table">
+      <tbody>
+         <tr>
+           <th>Semana de</th>
+             {% for a in quarta %} 
+            <th >{{ a.data|date:'d/m/Y' }}<a href="/editar_quarta/{{a.id}}"><i class="material-icons" data-md-tooltip="Editar">edit</i></a><a href="/deletar_quarta/{{a.id}}"><i class="material-icons" style=color:crimson data-md-tooltip="Apagar">delete</i></a></th>
+            {% endfor %} 
+        </tr>
+        <tr>
+         <th>Presidente</th>
+        {% for a in quarta %} 
+        <td>{{ a.presidente|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}  
+      </tr>
+      <tr>
+        <th>Oração Inicial</th>
+        {% for a in quarta %} 
+        <td>{{ a.oração_Inicial|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>  
+    <tr>
+      <th>Tesouros</th>
+        {% for a in quarta %} 
+        <td>{{ a.tesouros|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>  
+    <tr>
+      <th>Joias Espirituais</th>
+        {% for a in quarta %} 
+        <td>{{ a.joias_Espirituais|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>  
+      <th>Leitura da Bíblia</th>
+        {% for a in quarta %} 
+        <td>{{ a.leitura_da_Bíblia|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr> 
+    <tr>
+      <th>"Faça": Designação 01</th>
+        {% for a in quarta %} 
+        <td>{{ a.designação_01|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <th>"Faça": Ajudante 01</th>
+        {% for a in quarta %} 
+        <td>{{ a.ajudante_01|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <th>"Faça": Designação 02</th>
+        {% for a in quarta %} 
+        <td>{{ a.designação_02|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>  
+    <tr>
+      <th>"Faça": Ajudante 02</th>
+        {% for a in quarta %} 
+        <td>{{ a.ajudante_02|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <th>"Faça": Designação 03</th>
+        {% for a in quarta %} 
+        <td>{{ a.designação_03|default_if_none:"&nbsp;"  }}</td>
+        {% endfor %}
+    </tr> 
+    <tr>
+      <th>"Faça": Ajudante 03</th>
+        {% for a in quarta %} 
+        <td>{{ a.ajudante_03|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr> 
+    <tr>
+      <th>"Faça": Designação 04</th>
+        {% for a in quarta %} 
+        <td>{{ a.designação_04|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <th>"Faça": Ajudante 04</th>
+        {% for a in quarta %} 
+        <td>{{ a.ajudante_04|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <th>"Nossa Vida": Parte 01</th>
+        {% for a in quarta %} 
+        <td>{{ a.nossa_Vida_01|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr> 
+    <tr>
+      <th>"Nossa Vida": Parte 02</th>
+        {% for a in quarta %} 
+        <td>{{ a.nossa_Vida_02|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <th>Dirigente do Estudo</th>
+        {% for a in quarta %} 
+        <td>{{ a.dirigente_Estudo|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr> 
+    <tr>
+      <th>Leitor do Estudo</th>
+        {% for a in quarta %} 
+        <td>{{ a.leitor_Estudo|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>  
+    <tr>
+      <th>Oração Final</th>
+        {% for a in quarta %} 
+        <td>{{ a.oração_Final|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr> 
+    <tr>
+      <th>Indicador Principal</th>
+        {% for a in quarta %} 
+        <td>{{ a.indicador_Principal|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <th>Recepção</th>
+        {% for a in quarta %} 
+        <td>{{ a.indicador_Recepção|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <th>Volante 01</th>
+        {% for a in quarta %} 
+        <td>{{ a.volante_01|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <th>Volante 02</th>
+        {% for a in quarta %} 
+        <td>{{ a.volante_02|default_if_none:"&nbsp;" }}</td>
+        {% endfor %}
+    </tr>                                            
+         
+    </tbody>
+    </table>
+</div>  
+</div> 
+</div> 
+
+
+
+
+
+{% endblock %}
+
+ 

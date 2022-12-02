@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<br>
+<div class="container">
+<h3 style="text-align:center;">Relatório Mensal</h3>
+<br>
+<div class="row">
+<div class="col-md-12"> 
+  <div class="card">
+         <div class="card-body"> 
+          <form method="POST">
+            {% csrf_token %}
+                  
+                 <a id="registro_b" href="/contas/view_gerais_contas" class="btn btn-secondary" role="button" aria-pressed="true">Informações Gerais</a>
+                 <a id="registro_b" href="/contas/contas"  class="btn btn-secondary">Folha de Contas</a>
+                 <a id="registro_b" href="/contas/registro" class="btn btn-secondary">Registro (TO-62)</a>
+                 <input id="registro_b" type="submit" class="btn btn-info" value="Gerar Relatório">
+                 <a id="registro_b" href="{% static 'relatório_pronto.pdf' %}"class="btn btn-success" download="Relatório Mensal">Download</a>
+            </form>  
+            </div> 
+             
+         {% if messages %}
+         <ul class="messages">
+          {% for message in messages %}
+            <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+           {%  endfor %} 
+          </ul>
+          {% endif %}
+      </div> 
+      </div> 
+ </div>  
+ <div class="row">
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body" id="tabela_relatório">
+         <table>
+       <tbody>
+         <tr>
+             <th >Congregação:</th>
+             {% for a in relatório %} 
+             <td style="color:red">{{ a.congregação|default_if_none:"&nbsp;" }}</td>
+             {% endfor %} 
+          </tr> 
+          <tr>
+            <th >Mês/Ano:</th>
+           
+            <td style="color:red">{{ mês_ano|default_if_none:"&nbsp;" }}</td>
+           
+         </tr>
+    </tbody>
+    </table>
+       </div>
+     </div>
+   </div>
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body" id="tabela_relatório">
+    <table>
+       <tbody>
+          <tr>  
+            <th >Saldo Disponível no Início do Mês: </th>
+              <td style="color:red">{{ saldo_total_mês_anterior|floatformat:2}}</td>
+          </tr>
+          <tr>
+            <th >Saldo Disponível no Fim do Mês: </th>
+             <td style="color:red">{{ saldo_mês_atual|floatformat:2}}</td>
+           </tr>
+          </tbody>
+    </table> 
+       </div>
+     </div>
+   </div>
+ </div> 
+  <br> 
+  <div class="row">
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body" id="tabela_relatório">
+         <h5 class="card-title">Entradas</h5>
+         <table>
+       <tbody>
+         <tr>
+       <th>Donativos para a Congregação (caixas)</th>
+      <td>{{ total_C|floatformat:2}}</td>
+   </tr>
+   <tr>
+    <th>Donativos para a Congregação (Transferências para C/C)</th>
+   <td>{{ total_CE|floatformat:2}}</td>
+</tr>
+      <tr>
+      <th>Donativos para Fundos em Betel</th>
+      {% for a in relatório %} 
+      <td>{{ out_ent_value|floatformat:2}}</td>
+      {% endfor %} 
+   </tr>
+      <tr>
+      <th>Rendimentos da Conta</th>
+      {% for a in relatório %} 
+      <td>{{ rendimentos|floatformat:2}}</td>
+      {% endfor %} 
+   </tr>
+      <tr>
+      <th>Obra Mundial (caixas)</th>
+      {% for a in relatório %} 
+      <td>{{total_O|floatformat:2}}</td>
+      {% endfor %} 
+   </tr>
+   <tr>
+    <th>Renovação de Betel (caixas)</th>
+    {% for a in relatório %} 
+    <td>{{ total_CF|floatformat:2}}</td>
+    {% endfor %} 
+ </tr>
+ <th>Donativos para Transporte</th>
+ {% for a in relatório %} 
+ <td>{{ transporte|floatformat:2}}</td>
+ {% endfor %} 
+</tr>
+   <tr>
+      <th>Total das Entradas</th>
+    {% for a in relatório %} 
+    <td>{{ total_das_entradas|floatformat:2}}</td>
+    {% endfor %} 
+ </tr>
+ 
+ </tbody>
+ </table>
+       </div>
+     </div>
+   </div>
+   <div class="col-sm-6">
+     <div class="card">
+       <div class="card-body" id="tabela_relatório">
+         <h5 class="card-title">Saídas</h5>
+         <table>
+       <tbody>
+      <tr> 
+           <th>Despesas Operacionais</th>
+          {% for a in relatório %} 
+          <td>{{ total_G|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+       <tr>
+          <th>Obra Mundial - Resolução</th>
+          {% for a in relatório %} 
+          <td>{{ a.remessa_Enviada_para_Betel_Resolução|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+       <tr>
+          <th>Obra Mundial (caixas)</th>
+          {% for a in relatório %} 
+          <td>{{total_O|floatformat:2}}</td>
+          {% endfor %} 
+       </tr>
+       <tr>
+        <th>Renovação de Betel (caixas)</th>
+        {% for a in relatório %} 
+        <td>{{total_CF|floatformat:2}}</td>
+        {% endfor %} 
+     </tr>
+        <tr>
+          <th>Total de Despesas</th>
+          {% for a in relatório %} 
+          <td>{{ total_das_despesas|floatformat:2 }}</td>
+          {% endfor %} 
+       </tr>
+        
+    </tbody>
+ </table>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class="row" >
+  <div class="col-sm-6">
+    <form method="GET"> 
+      {% csrf_token %} 
+   
+   <div class="card-body">
+    <p style="font-size: 15px">Os dados acima são automaticamente preenchidos com o lançado em "Informações Gerais" e na "Folha de Contas". Apenas imediatamente antes de imprimir o relatório, insira as informações adicionais abaixo que sejam pertinentes, e confirma</p>
+        </div>
+       </div>
+  
+  <div class="col-sm-4">
+   <div class="card-body">
+         <a><button type="submit" class="btn btn-primary">Ok</button></a>
+         <a><button type="submit" class="btn btn-danger">Limpar Informações Abaixo</button></a>
+        </div>
+   </div>
+
+ </div>
+ <div class="row" >
+    <div class="col-sm-6">
+     <div class="card" >
+    
+        
+
+        <div id="field" class="card-body">
+          <fieldset >
+            <h5>Outras Entradas de Valores</h5>
+            <input type="text" size="20" name="outras_ent_1_mot" placeholder="Informe a Descrição">
+            <td id="field_td">{{ outras_ent_1_mot|default_if_none:"&nbsp;" }}</td><br>
+            <input type="number" step="0.01" size="20" name="outras_ent_1" placeholder="Informe o Valor"> 
+            <td>{{ outras_ent_1|floatformat:2}}</td><br>
+            </fieldset>
+           <br>
+           
+        </div>
+     </div>
+   </div>
+   <div class="col-sm-6">
+    <div id="field" class="card-body">
+         <fieldset >
+           <h5>Outras Saídas de Valores</h5>
+           <input type="text" size="20" name="outras_sai_1_mot" placeholder="Informe a Descrição">
+           <td>{{ outras_sai_1_mot|default_if_none:"&nbsp;"}}</td><br>
+           <input type="number" step="0.01" size="20" name="outras_sai_1" placeholder="Informe o Valor"> 
+           <td>{{ outras_sai_1|floatformat:2}}</td><br>
+    
+          </fieldset>
+          <br>
+          <fieldset >
+    
+            <input type="text" size="20" name="outras_sai_2_mot" placeholder="Informe a Descrição">
+           <td>{{ outras_sai_2_mot|default_if_none:"&nbsp;" }}</td><br>
+           <input type="number" step="0.01" size="20" name="outras_sai_2" placeholder="Informe o Valor"> 
+           <td>{{ outras_sai_2|floatformat:2 }}</td><br>
+          
+          </fieldset>
+        </div>
+  </div>
+</div>
+    <div class="row" >
+   <div class="col-sm-6">
+    <div id="field" class="card-body">
+     
+          <fieldset >
+            <h5>Fundos Reservados para Fins Específicos</h5>
+            <input type="number" step="0.01" size="20" name="fundos_reservados" placeholder="Informe o Valor">
+            <td>{{ fundos_reservados|floatformat:2}}</td><br>
+            </fieldset>
+         </div>
+        </div>
+   
+   <div class="col-sm-6">
+    <div id="field" class="card-body">
+   
+         <fieldset >
+           <h5>Servo de Contas</h5>
+           <input type="text" size="20" name="servo" placeholder="Informe o Nome">
+           <td>{{ servo|default_if_none:"&nbsp;" }}</td><br>
+          
+          </fieldset>
+        </form>
+ 
+       </div>
+    </div>
+  </div>
+  
+
+  </div>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<br>
+<div class="container">
+<h3 style="text-align:center;">Designações da Reunião Nossa Vida</h3>
+<br>
+<div class="row">
+  
+<div class="col-sm-6"> 
+    <p>Escolha as datas para proceder as designações. Para meses diferentes, utilize a pesquisa</p>
+  <div class="card">
+<form method="GET"> 
+    {% csrf_token %} 
+         <div class="card-body"> 
+              <input class="input col-md-6" type="month" name="data" placeholder="mês" maxlength="11" style="margin: 4% 0% 2% 0%;">
+            <button id='registro_b' class="btn btn-primary">Pesquisar <br>por Mês</button>
+        </form>
+              </div> 
+            </div> 
+        </div> 
+    </div>
+        <div class="row">
+            <div class="col-sm-6"> 
+                <div class="card-title">
+                    <h5>Meio de Semana</h5>
+                    <div class="card-body"> 
+                        {% for a in quarta %} 
+                        <a href="/desig_coordenador_quarta/{{a.id}}" id='registro_b' class="btn btn-success">{{ a.data|date:'d/m' }}</a>
+                        {% endfor %}
+       </div> 
+      </div> 
+ </div>   
+</div> 
+<div class="row">
+    <div class="col-md-12" id="des_ind"> 
+       <table class="table">
+         <tbody>
+            <tr>
+                <th>Semana de</th>
+                  {% for a in quarta %} 
+                 <th >{{ a.data|date:'d/m' }}</th>
+                 {% endfor %} 
+             </tr>
+       <tr>
+         <th>Presidente</th>
+           {% for a in quarta %} 
+           <td>{{ a.presidente|default_if_none:"&nbsp;" }}</td>
+           {% endfor %}
+       </tr>
+       <tr>
+         <th>Oração Inicial</th>
+           {% for a in quarta %} 
+           <td>{{ a.oração_Inicial|default_if_none:"&nbsp;" }}</td>
+           {% endfor %}
+       </tr>
+       <tr>
+         <th>Tesouros</th>
+           {% for a in quarta %} 
+           <td>{{ a.tesouros|default_if_none:"&nbsp;" }}</td>
+           {% endfor %}
+       </tr>
+       <tr>
+         <th>Joias Espirituais</th>
+           {% for a in quarta %} 
+           <td>{{ a.joias_Espirituais|default_if_none:"&nbsp;" }}</td>
+           {% endfor %}
+       </tr>  
+       <tr>
+        <th>Nossa Vida 01</th>
+          {% for a in quarta %} 
+          <td>{{ a.nossa_Vida_01|default_if_none:"&nbsp;" }}</td>
+          {% endfor %}
+      </tr>
+      <tr>
+        <th>Nossa Vida 02</th>
+          {% for a in quarta %} 
+          <td>{{ a.nossa_Vida_02|default_if_none:"&nbsp;" }}</td>
+          {% endfor %}
+      </tr>
+      <tr>
+        <th>Estudo Bíblico</th>
+          {% for a in quarta %} 
+          <td>{{ a.dirigente_Estudo|default_if_none:"&nbsp;" }}</td>
+          {% endfor %}
+      </tr>                                                                   
+            
+       </tbody>
+       </table>
+   </div>  
+   </div> 
+  </div>   
+
+
+</div>   
+</div> 
+</div> 
+
+{% endblock %}

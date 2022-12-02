@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<br>
+<div class="container">
+<h3 style="text-align:center;">Designações de Conferência Pública</h3>
+<br>
+<div class="row">
+  
+<div class="col-sm-6"> 
+    <p>Escolha as datas para proceder as designações. Para meses diferentes, utilize a pesquisa</p>
+  <div class="card">
+<form method="GET"> 
+    {% csrf_token %} 
+         <div class="card-body"> 
+              <input class="input col-md-6" type="month" name="data" placeholder="mês" maxlength="11" style="margin: 4% 0% 2% 0%;">
+            <button id='registro_b' class="btn btn-primary">Pesquisar <br>por Mês</button>
+        </form>
+              </div> 
+            </div> 
+        </div> 
+    </div>
+        <div class="row">
+            <div class="col-sm-6"> 
+                <div class="card-title">
+                 
+                    <div class="card-body"> 
+                        {% for a in sabado %} 
+                        <a href="/desig_conferencia2/{{a.id}}" id='registro_b' class="btn btn-success">{{ a.data|date:'d/m' }}</a>
+                        {% endfor %}
+       </div> 
+      </div> 
+ </div>   
+</div> 
+<div class="row">
+    <div class="col-md-12" id="des_ind"> 
+       <table class="table">
+         <tbody>
+            <tr>
+                <th>Semana de</th>
+                  {% for a in sabado %} 
+                 <th >{{ a.data|date:'d/m' }}</th>
+                 {% endfor %} 
+             </tr>
+       <tr>
+         <th>Orador</th>
+           {% for a in sabado %} 
+           <td>{{ a.orador|default_if_none:"&nbsp;" }}</td>
+           {% endfor %}
+       </tr>
+       <tr>
+         <th>Congregação</th>
+           {% for a in sabado %} 
+           <td>{{ a.congregação|default_if_none:"&nbsp;" }}</td>
+           {% endfor %}
+       </tr>
+       <tr>
+         <th>Tema</th>
+           {% for a in sabado %} 
+           <td>{{ a.tema|default_if_none:"&nbsp;" }}</td>
+           {% endfor %}
+       </tr>
+       
+  </div>   
+
+
+</div>   
+</div> 
+</div> 
+
+{% endblock %}

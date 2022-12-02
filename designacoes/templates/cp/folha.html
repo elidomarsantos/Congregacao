@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br>
+<div class="container">
+ <span id='span_h3'><h3>Folha de Contas</h3></span>
+<br>
+
+       <div class="col-md-10">
+       <div class="card" >
+        <div class="card-body" >
+      <table class="table" id='tabela2_FC'>
+        <tbody>
+            <tr>
+              <th>Donativos Mês Anterior</th>
+              <th>Donativos (entrada)</th>
+              <th>Donativos (saída)</th>
+              <th>Conta Bancária Mês Anterior</th>
+              <th>Conta (entrada)</th>
+              <th>Conta (saída)</th>
+              <th>Conta em Betel Mês Anterior</th>
+              <th>Fundos em Betel (entrada)</th>
+              <th>Fundos em Betel (saída)</th>
+              <th style="color:blue">Saldo Total Disponível (E)</th>
+            </tr>
+            <tr>
+              <td>{{ saldo_donativos_anterior|floatformat:2 }}</td>
+              <td>{{ don_ent_value|floatformat:2 }}</td>
+              <td>{{ don_sai_value|floatformat:2 }}</td>
+               <td>{{ saldo_conta_anterior|floatformat:2 }}</td>
+              <td>{{ con_ent_value|floatformat:2 }}</td>
+              <td>{{ con_sai_value|floatformat:2 }}</td>
+              <td>{{ saldo_betel_anterior|floatformat:2 }}</td>
+              <td>{{ out_ent_value|floatformat:2 }}</td>
+              <td>{{ out_sai_value|floatformat:2 }}</td>
+              <td>{{ total_total|floatformat:2 }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br> 
+           <table  class="table" id='tabela2_FC'>
+            <tbody>
+              <tr>
+                <th >Saldo do Extrato Mensal</th>
+                <th >Remessa para Betel</th>
+                <th style="color:green">Saldo do Extrato, excluindo Remessa (B)</th>
+                <th style="color:red">Saldo Final Extrato de Betel (C)</th>
+                <th>Saldo Final Donativos</th>
+                <th style="color:green">Saldo Final Conta Bancária (A)</th>
+                <th style="color:red">Saldo Final Betel (D)</th>
+                <th>Donativos Congregação (caixas e TE)</th>
+                <th>Donativos Obra Mundial</th>
+                <th>Total Despesas</th>
+              </tr>
+                <tr>
+                  <td>{{ saldo_final_extrato_mensal|floatformat:2 }}</td>
+                  <td>{{ betel|floatformat:2 }}</td>
+                  <td>{{ saldo_conta_extrato_sem_betel|floatformat:2 }}</td>
+		              <td>{{ saldo_final_extrato_betel|floatformat:2 }}</td>
+                  <td>{{ sal_final_don|floatformat:2 }}</td>
+		              <td>{{ sal_final_con|floatformat:2 }}</td>
+                  <td>{{ sal_final_betel|floatformat:2 }}</td>
+                  <td>{{ total_C_TE|floatformat:2 }}</td>
+                  <td>{{ total_O|floatformat:2 }}</td>
+                  <td>{{ total_G|floatformat:2 }}</td>
+                </tr>
+                </tbody>
+                </table> 
+                <tr>
+                  <p style="font-size:13px">O saldo final da conta (A), após inserção de todas as movimentações, deve ser exatamente igual ao saldo final do extrato, excluindo a remessa enviada para Betel (B);</p>
+                  <p style="font-size:13px" >O saldo final da conta em Betel (C), após inserção de todas as movimentações, deve ser exatamente igual ao saldo final do extrato enviado por Betel (D)</p>
+                  <p style="font-size:13px" >O saldo total disponível (E), deve ser igual ao saldo disponível no fim do mês, no "Relatório Mensal".</p>
+                  
+                  <a id="registro_b" href="/contas/view_gerais_contas" class="btn btn-secondary" role="button" aria-pressed="true">Informações Gerais</a>
+                <a id="registro_b" href="/contas/relatório_mensal"  class="btn btn-secondary">Relatório Mensal</a>
+                <a id="registro_b" href="/contas/registro" class="btn btn-secondary">Registro (TO-62)</a>
+                <a id="registro_b" href="/contas/imprimir_FC" class="btn btn-success" role="button" aria-pressed="true">Gerar Formulário</a>
+                 
+                </tr>
+           </div>
+        </div>
+     </div>  
+
+  <br>
+<div class="card">
+  <div class="card-body">
+  <h5>Inserir Movimentações</h5>
+   <div id='form_FC' class='row'>
+    <form method="post">
+     
+      
+       {% csrf_token %}
+       <div class="form-row">
+          <div class="form-group" id="grande" >
+           {{ contas.dia|as_crispy_field }}
+         </div>
+         <div class="form-group" id="enorme">    
+           {{ contas.descrição|as_crispy_field }}
+         </div>
+          <div class="form-group" id="simbolo">    
+           {{ contas.símbolo|as_crispy_field }}
+         </div>
+         </div>
+       <div class="form-row">
+          <div class="form-group" id="valor">    
+           {{ contas.donativos_Entrada|as_crispy_field }}
+         </div>
+         <div class="form-group" id="valor">    
+           {{ contas.donativos_Saída|as_crispy_field }}
+         </div>
+         <div class="form-group" id="valor">    
+           {{ contas.conta_Entrada|as_crispy_field }}
+         </div>
+         <div class="form-group" id="valor">    
+           {{ contas.conta_Saída|as_crispy_field }}
+         </div>
+         <div class="form-group" id="valor">    
+           {{ contas.outra_Entrada|as_crispy_field }}
+         </div>
+         <div class="form-group" id="valor">    
+           {{ contas.outra_Saída|as_crispy_field }}
+         </div>
+         <div class="form-group" id="valor">    
+          <input type="submit" class="btn btn-success" value="Salvar">
+          
+        </div>
+        <span><a href="/contas/deletar_fc" class="btn btn-danger">Apagar todas as Movimentações</a></span>
+        
+       </div>
+       </div> 
+   </div>
+</form>
+</div>
+  <div class="form-group col-md-6">    
+    {% if messages %}
+    <ul class="messages">
+     {% for message in messages %}
+       <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+      {%  endfor %} 
+     </ul>
+     {% endif %}
+    </div>
+
+  <div id='tabela_FC' class="row">
+ <div > 
+    <table class="table">
+      <tbody>
+     
+         <tr>
+           <th>Dia</th>
+           <th width="100%">Descrição</th>
+           <th>Símbolo</th>
+           <th>Donativos (entrada)</th>
+           <th>Donativos (saída)</th>
+           <th>Conta (entrada)</th>
+           <th>Conta (saída)</th>
+           <th>Outra (entrada)</th>
+           <th>Outra (saída)</th>
+           <th>Editar</th>
+           <th>Apagar</th>
+          
+          </tr>
+         {% for a in numeros %} 
+        <tr>
+          <td>{{ a.dia|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.descrição|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.símbolo|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.donativos_Entrada|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.donativos_Saída|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.conta_Entrada|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.conta_Saída|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.outra_Entrada|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.outra_Saída|default_if_none:"&nbsp;" }}</td>
+
+
+          <td><a href="/contas/editar_fc/{{a.id}}"><i class="material-icons" data-md-tooltip="Editar">edit</i></a></td>
+          <td><a href="/contas/deletar_fc/{{a.id}}"><i class="material-icons" style=color:crimson data-md-tooltip="Apagar">delete</i></a></td>
+         
+            
+        </tr>
+        {% endfor %} 
+    </tbody>
+    </table>
+</div>  
+</div> 
+
+       
+</div>  
+</div>  
+</div>  
+
+{% endblock %}

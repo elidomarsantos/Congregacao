@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container">
+ <span id='span_h3'><h3>Designações de Conferência Pública</h3></span>
+   <br>
+      <div class='row'>
+             <form method="post">
+               {% csrf_token %}
+                <br>
+              
+                <div class="form-row">
+                <div class="form-group col-md-12">
+                {{ form.data|as_crispy_field }}
+                </div>
+                </div>
+                 <div class="form-row">
+                <div class="form-group col-md-3">
+                {{ form.orador|as_crispy_field }}
+                </div>
+          
+                <div class="form-group col-md-3">
+                {{ form.congregação|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6">
+                {{ form.tema|as_crispy_field }}
+             </div>
+            </div>
+            <div id="sumir">
+              {{ form.leitor_da_Sentinela|as_crispy_field }}
+              {{ form.indicador_Principal|as_crispy_field }}
+              {{ form.indicador_Recepção|as_crispy_field }}
+              {{ form.volante_01|as_crispy_field }}
+              {{ form.volante_02|as_crispy_field }}
+            </div>
+             <input type="submit" class="btn btn-success" name="meio" value="Salvar ">
+ 
+         </form>
+    
+   </div>
+    </div>   
+
+
+{% endblock %}

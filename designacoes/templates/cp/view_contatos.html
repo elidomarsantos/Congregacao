@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+<h3 style="text-align:center;">Contatos dos Publicadores</h3>
+<br>
+<div class="row">
+<div class="col-sm-12"> 
+  <div class="card">
+<form method="GET"> 
+    {% csrf_token %} 
+         <div class="card-body"> 
+              <input class="input col-md-3" type="search" name="nome" placeholder="Digite o Nome" maxlength="11" style="margin: 4% 0% 2% 0%;">
+            <button class="btn btn-primary">Pesquisar</button>
+            <button id='b_visualizar' class="btn btn-warning" name="todos">Visualizar<br>Todos</button>
+                </form>
+                <span><a href="/contatos/add_contatos" id='bot' class="btn btn-success">Inserir<br>Contato</a></span>
+                <span><a href="{% static 'Contatos.xlsx' %}" id='bot' class="btn btn-danger" download="contatos">Baixar Lista<br>de Contatos</a></span>
+               
+             </div> 
+             
+         {% if messages %}
+         <ul class="messages">
+          {% for message in messages %}
+            <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+           {%  endfor %} 
+          </ul>
+          {% endif %}
+      </div> 
+      </div> 
+ </div>   
+  <br> 
+  <div class="row">
+ <div class="col-md-12"> 
+    <table class="table">
+      <tbody>
+     
+         <tr>
+           <th>Nome</th>
+           <th>Telefone Pessoal</th>
+           <th>Contato de Emergência</th>
+           <th>Email</th>
+           <th>Editar</th>
+           <th>Apagar</th>
+           <th>Enviar Whatsapp</th>
+          </tr>
+         {% for a in contatos %} 
+        <tr>
+          <td>{{ a.nome|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.telefone|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.contato_de_Emergência|default_if_none:"&nbsp;" }}</td>
+          <td>{{ a.email|default_if_none:"&nbsp;" }}</td>
+          <td><a href="/contatos/editar_contato/{{a.id}}"><i class="material-icons" data-md-tooltip="Editar">edit</i></a></td>
+          <td><a href="/contatos/deletar_contato/{{a.id}}"><i class="material-icons" style=color:crimson data-md-tooltip="Apagar">delete</i></a></td>
+          <td><a href="https://api.whatsapp.com/send?l=pt&amp;phone=55{{ a.telefone }}"><img 
+            src="{% static 'img/wapp.jpg' %}" style="height:40px;" data-selector="img"></a></td>
+         </tr>
+        {% endfor %} 
+   
+    </tbody>
+    </table>
+</div>  
+</div> 
+</div> 
+
+{% endblock %}

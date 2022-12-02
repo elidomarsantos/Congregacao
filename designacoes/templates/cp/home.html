@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div id= "cardhome" class="jumbotron jumbotron-fluid p-4 mt-5 mb-0"> 
+  <div class="container">
+   <div class="row">
+     <div class="col-12 col-sm-12 col-md-2 col-lg-4 col-xl-4 cizgi">
+       <div class="card h-100 d-inline-block">
+         <img class="card-img-top" src="{% static 'img/1.jpg' %}">
+         <div class="card-body">
+           <a href="/fotos" class="card-text">Um pouco da história da congregação, em fotos!
+          </div>
+       </div>
+     </div>
+     
+     <div class="col-12 col-sm-12 col-md-2col-lg-4 col-xl-4 cizgi">
+       <div class="card h-100 d-inline-block">
+         <img class="card-img-top" src="{% static 'img/3.jpg' %}" alt="Imagem de capa do card">
+         <div class="card-body">
+           <a href="/escritorio" class="card-text">Veja os últimos anúncios importantes enviados pelo Escritório</a>
+         </div>
+       </div>
+     </div>
+     
+     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+       <div class="card h-100 d-inline-block">
+         <img class="card-img-top" src="{% static 'img/2.jpg' %}" alt="Imagem de capa do card">
+         <div class="card-body">
+           <a href="/local" class="card-text">Confira aqui importantes informações de nossa congregação! </a>
+         </div>
+       </div>
+     </div>	
+   </div>
+ </div>
+</div>
+
+<hr>
+
+    <div id= "cardhome" class="jumbotron jumbotron-fluid p-4 mt-5 mb-0"> 
+      <marquee> -- Últimas Notícias -- <br></marquee>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+            <div class="card h-100 d-inline-block">
+              <div class="card-body">
+                <h5 class="card-title">Próxima Visita</h5>
+                <a class="card-text">Está bem próxima a visita do nosso Superintendente de Circuito, do dia 21 a 26 de Junho de 2022 </a>
+               </div>
+            </div>
+          </div>
+          
+          <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+            <div class="card h-100 d-inline-block">
+              <div class="card-body">
+                <h5 class="card-title">Congresso 2022</h5>
+                <a class="card-text">Dia 03 de julho começaremos a assistir nosso Congresso 2022! Teremos o privilégio de receber os irmãos do Corpo Governante e seus ajudantes em nossas casas. Preparemos nosso coração! </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="card h-100 d-inline-block">
+              <div class="card-body">
+                <h5 class="card-title">Limpeza do Salão</h5>
+                <a class="card-text">Além da limpeza feita a cada reunião, será também feita uma limpeza mensal. A cada mês, dois grupos terão o privilégio. Este mês de Maio, dia 15, os grupos 01-Geraldo, e 02-Elidomar, estão designados </a>
+              </div>
+            </div>
+          </div>	
+        </div>
+      </div>
+    </div>
+    <hr>
+    <footer>
+      <div class="jumbotron jumbotron-fluid p-2 mt-5 mb-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-6 cizgi">
+              <div class="card bg-secondary border-3 h-100 d-inline-block">
+                <div class="card-body text-center">
+                <p> Congregação Canto dos Pássaros, desde 2016 louvando e honrando o nome do Soberano Senhor Jeová no Loteamento Canto dos Pássaros, Condomínios Caminhos do Mar e do Rio, e Loteamento Senhor dos Passos. Este site é exclusivamente direcionado para esta congregação das Testemunhas de Jeová. 
+                 </p>
+                 </div>
+              </div>
+            </div>
+            <br>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-6 cizgi">
+              <div class="card bg-secondary border-0 h-100 d-inline-block">
+                <div class="card-body text-center">
+               <p>
+                Para ler e obter um estudo da Bíblia, e obter gratuitamente vasto material baseado na Palavra de Deus, acesse:</p>
+                 <br>               
+                 <a href="https://www.jw.org/pt/" class="btn btn-primary">Site Oficial das Testemunhas de Jeová</a>
+               
+                </div>
+              </div>
+            </div>
+ 
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--# Footer #-->  
+
+
+{% endblock %}

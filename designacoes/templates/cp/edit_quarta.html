@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+  <span id='span_h3'><h3>Editar Designações - Reunião de Meio de Semana</h3></span>
+ <br>
+       <div class='row'>
+              <form method="post">
+                <div>
+                  <input type="submit" class="btn btn-success" value="Salvar">
+                  <a href="/historico_quarta" class="btn btn-primary" role="button" aria-pressed="true">Visualizar Histórico de Designações</a>
+                  </div>
+                  <br>
+                 {% csrf_token %}
+                 <div class="form-row">
+                  <div class="form-group col-md-4">    
+                     {{ form.data|as_crispy_field }}
+                  </div>    
+                     <div class="form-group col-md-4">    
+                     {{ form.presidente|as_crispy_field }}
+                 </div>    
+                     <div class="form-group col-md-4">    
+                     {{ form.oração_Inicial|as_crispy_field }}
+                   </div>
+                 </div>
+                   <h5>Tesouros da Palavra de Deus</h5>   
+                   <div class="form-row">
+                       <div class="form-group col-md-4"> 
+                      {{ form.tesouros|as_crispy_field }}
+                 </div>
+                     <div class="form-group col-md-4"> 
+                     {{ form.joias_Espirituais|as_crispy_field }}
+                 </div>     
+                     <div class="form-group col-md-4"> 
+                     {{ form.leitura_da_Bíblia|as_crispy_field }}
+                 </div>
+               </div>
+                 <h5>Faça seu Melhor no Ministério</h5>   
+                 <div class="form-row">
+                   <div class="form-group col-md-3">
+                     {{ form.designação_01|as_crispy_field }}
+                 </div>
+                   <div class="form-group col-md-3">    
+                     {{ form.ajudante_01|as_crispy_field }}
+                 </div>
+                     <div class="form-group col-md-3">    
+                     {{ form.designação_02|as_crispy_field }}
+                 </div>
+                     <div class="form-group col-md-3">    
+                     {{ form.ajudante_02|as_crispy_field }}
+                   </div>
+                 </div>
+                   <div class="form-row">
+                     <div class="form-group col-md-3">
+                       {{ form.designação_03|as_crispy_field }}
+                   </div>
+                     <div class="form-group col-md-3">    
+                       {{ form.ajudante_03|as_crispy_field }}
+                   </div>
+                       <div class="form-group col-md-3">    
+                       {{ form.designação_04|as_crispy_field }}
+                   </div>
+                       <div class="form-group col-md-3">    
+                       {{ form.ajudante_04|as_crispy_field }}
+                     </div>
+                 </div>   
+                     <h5>Nossa Vida Cristã</h5>   
+                     <div class="form-row">
+                     <div class="form-group col-md-3">
+                     {{ form.nossa_Vida_01|as_crispy_field }}
+                     </div>
+                     <div class="form-group col-md-3">
+                     {{ form.nossa_Vida_02|as_crispy_field }}
+                     </div>
+                     <div class="form-group col-md-2">
+                     {{ form.dirigente_Estudo|as_crispy_field }}
+                  </div>
+                     <div class="form-group col-md-2">
+                     {{ form.leitor_Estudo|as_crispy_field }}
+                  </div>
+                  <div class="form-group col-md-2">
+                     {{ form.oração_Final|as_crispy_field }}
+                 </div>
+             </div>
+             <h5>Indicadores</h5>   
+                  <div class="form-row">
+                 <div class="form-group col-md-3">
+                 {{ form.indicador_Principal|as_crispy_field }}
+                 </div>
+                 <div class="form-group col-md-3">
+                 {{ form.indicador_Recepção|as_crispy_field }}
+                 </div>
+                 <div class="form-group col-md-3">
+                 {{ form.volante_01|as_crispy_field }}
+              </div>
+                 <div class="form-group col-md-3">
+                 {{ form.volante_02|as_crispy_field }}
+              </div>
+             </div> 
+             
+         </form>
+         </div>
+     </div>   
+         
+         
+    
+{% endblock %}

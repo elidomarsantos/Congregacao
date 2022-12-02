@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-sm">
+        <div id="cardlocal" class="card h-100 card-inline-block w-100">
+             <div class="card-body">
+                <h5 class="card-title">Contatos</h5>
+                <hr>
+              <a href="/contatos/view_contatos" class="card-text">Contatos dos publicadores da Congregação</a>
+            </div>
+          </div>
+    </div>
+    <div class="col-sm">
+        <div id="cardlocal" class="card h-100 card-inline-block w-100">
+            <div class="card-body">
+               <h5 class="card-title">Reunião de Meio de Semana</h5>
+               <hr>
+             <a href="/desig_quarta" class="card-text">Formulários para Designações das Reuniões de Meio de Semana</a>
+           </div>
+         </div>
+   </div>
+    <div class="col-sm">
+        <div id="cardlocal" class="card h-100 card-inline-block w-100">
+            <div class="card-body">
+               <h5 class="card-title">Reunião de Fim de Semana</h5>
+               <hr>
+             <a href="/desig_sabado" class="card-text">Formulários para Designações das Reuniões de Fim de Semana</a>
+           </div>
+         </div>
+   </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm">
+            <div id="cardlocal" class="card h-100 card-inline-block w-100">
+                 <div class="card-body">
+                    <h5 class="card-title">Grupos</h5>
+                    <hr>
+                  <a href="/grupos" class="card-text">Grupos de serviço de campo, seus dirigentes e componentes</a>
+                </div>
+              </div>
+        </div>
+        <div class="col-sm">
+            <div id="cardlocal" class="card h-100 card-inline-block w-100">
+                <div class="card-body">
+                   <h5 class="card-title">Contas</h5>
+                   <hr>
+                 <a href="/contas/view_gerais_contas" class="card-text">Formulários para Fechamento Mensal das Contas</a>
+               </div>
+             </div>
+       </div>
+        <div class="col-sm">
+            <div id="cardlocal" class="card h-100 card-inline-block w-100">
+                <div class="card-body">
+                   <h5 class="card-title">Visita do Superintendente de Circuito</h5>
+                   <hr>
+                 <a href="/visita" class="card-text">Data da próxima visita</a>
+               </div>
+             </div>
+       </div>
+        </div>
+
+{% endblock %}

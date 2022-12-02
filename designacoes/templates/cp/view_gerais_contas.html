@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<br>
+<div class="container">
+<h3 style="text-align:center;">Informações Gerais para Fechamento das Contas</h3>
+<br>
+<div class="row">
+<div class="col-sm-12"> 
+  <div class="card">
+         <div class="card-body"> 
+         
+            {% if gerais %}
+                <a id="registro_b" href="/contas/deletar_gerais_contas" class="btn btn-danger">Limpar</a>
+             {% else %}  
+               <a id="registro_b" href="/contas/add_gerais_contas" class="btn btn-success">Inserir</a>
+              {% endif %}  
+              {% for a in gerais %} 
+             <a id="registro_b"href="/contas/editar_gerais_contas/{{a.id}}" class="btn btn-warning">Editar</a>
+              {% endfor %} 
+                <a id="registro_b"href="/contas/contas"  class="btn btn-secondary">Folha de Contas</a></span>
+                <a id="registro_b"href="/contas/relatório_mensal"  class="btn btn-secondary">Relatório Mensal</a>
+                <a id="registro_b"href="/contas/registro" class="btn btn-secondary">Registro (TO-62)</a>
+               
+               </div> 
+             
+         {% if messages %}
+         <ul class="messages">
+          {% for message in messages %}
+            <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+           {%  endfor %} 
+          </ul>
+          {% endif %}
+      </div> 
+      </div> 
+ </div>   
+  <br> 
+  <div class="row">
+ <div class="col-md-6"> 
+    <table id="tabela_view_gerais">
+      <tbody>
+
+           <tr>
+           <th>Congregação</th>
+           {% for a in gerais %} 
+           <td>{{ a.congregação|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+        </tr>  
+           <th>Cidade</th>
+           {% for a in gerais %} 
+           <td>{{ a.cidade|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+        </tr>
+           <tr>
+           <th>Estado</th>
+           {% for a in gerais %} 
+           <td>{{ a.estado|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+        </tr>
+           <tr>
+           <th>Mês</th>
+           {% for a in gerais %} 
+           <td>{{ a.mês|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+        </tr>
+           <tr>
+           <th>Ano</th>
+           {% for a in gerais %} 
+           <td>{{ a.ano|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+        </tr>
+           <tr>
+           <th>Data do Fechamento</th>
+           {% for a in gerais %} 
+           <td>{{ a.data_do_Fechamento|date:'d/m/Y' }}</td>
+           {% endfor %} 
+        </tr>
+       
+    </tbody>
+   </table>
+</div>  
+<div class="col-md-6"> 
+   <table id="tabela_view_gerais">
+      <tbody>
+      
+        <tr>
+         <th>Remessa para Betel (Resolução)</th>
+         {% for a in gerais %} 
+         <td>{{ a.remessa_Enviada_para_Betel_Resolução|default_if_none:"&nbsp;" }}</td>
+         {% endfor %} 
+      </tr>
+           <tr>
+            <th>Saldo Final do Extrato Mensal</th>
+           {% for a in gerais %} 
+           <td>{{ a.saldo_Final_do_Extrato_Mensal|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+        </tr>
+           <tr>
+           <th>Saldo Final do Extrato de Betel</th>
+           {% for a in gerais %} 
+           <td>{{ a.saldo_Final_do_Extrato_de_Betel|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+        </tr>
+           <tr>
+           <th>Saldo Final dos Donativos Mês Anterior</th>
+           {% for a in gerais %} 
+           <td>{{ a.saldo_Final_dos_Donativos_Mês_Anterior|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+        </tr>
+           <tr>
+           <th>Saldo Final da Conta Mês Anterior</th>
+           {% for a in gerais %} 
+           <td>{{ a.saldo_Final_da_Conta_Bancária_Mês_Anterior|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+            </tr>
+           <tr>
+           <th>Saldo Final em Betel Mês Anterior</th>
+           {% for a in gerais %} 
+           <td>{{ a.saldo_Final_da_Conta_em_Betel_Mês_Anterior|default_if_none:"&nbsp;" }}</td>
+           {% endfor %} 
+          </tr>
+         </tbody>
+      </table>
+ </div>  
+</div> 
+</div> 
+</div> 
+
+
+{% endblock %}

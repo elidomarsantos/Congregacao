@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container">
+ <span id='span_h3'><h3>Designações da Reunião Nossa Vida</h3></span>
+   <br>
+      <div class='row'>
+             <form method="post">
+               {% csrf_token %}
+                <br>
+                 <div class="form-row">
+                <div class="form-group col-md-4">
+                {{ form.data|as_crispy_field }}
+               </div>
+            <div class="form-group col-md-4">    
+               {{ form.presidente|as_crispy_field }}
+           </div>    
+               <div class="form-group col-md-4">    
+               {{ form.oração_Inicial|as_crispy_field }}
+             </div>
+           </div>
+             <h5>Tesouros da Palavra de Deus</h5>   
+             <div class="form-row">
+                 <div class="form-group col-md-4"> 
+                {{ form.tesouros|as_crispy_field }}
+           </div>
+               <div class="form-group col-md-4"> 
+               {{ form.joias_Espirituais|as_crispy_field }}
+           </div> 
+         </div>
+           <div id="sumir">    
+              
+               {{ form.leitura_da_Bíblia|as_crispy_field }}
+               {{ form.designação_01|as_crispy_field }}
+               {{ form.ajudante_01|as_crispy_field }}
+               {{ form.designação_02|as_crispy_field }}
+               {{ form.ajudante_02|as_crispy_field }}
+               {{ form.designação_03|as_crispy_field }}
+               {{ form.ajudante_03|as_crispy_field }}
+               {{ form.designação_04|as_crispy_field }}
+               {{ form.ajudante_04|as_crispy_field }}
+               {{ form.indicador_Principal|as_crispy_field }}
+               {{ form.indicador_Recepção|as_crispy_field }}
+               {{ form.volante_01|as_crispy_field }}
+               {{ form.volante_02|as_crispy_field }}
+               </div>
+           
+               <h5>Nossa Vida Cristã</h5>   
+               <div class="form-row">
+               <div class="form-group col-md-5">
+               {{ form.nossa_Vida_01|as_crispy_field }}
+               </div>
+               <div class="form-group col-md-5">
+               {{ form.nossa_Vida_02|as_crispy_field }}
+               </div>
+            </div>
+               <div class="form-row">
+               <div class="form-group col-md-4">
+               {{ form.dirigente_Estudo|as_crispy_field }}
+            </div>
+               <div class="form-group col-md-4">
+               {{ form.leitor_Estudo|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4">
+               {{ form.oração_Final|as_crispy_field }}
+           </div>
+       </div>
+      
+            
+                
+                    <input type="submit" class="btn btn-success" name="meio" value="Salvar ">
+            
+      
+          </form>
+    </div>
+</div>   
+
+
+{% endblock %}

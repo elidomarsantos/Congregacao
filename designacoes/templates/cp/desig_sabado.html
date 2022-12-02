@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container">
+ <span id='span_h3'><h3>Novas Designações - Reunião de Fim de Semana</h3></span>
+  <br>
+  <br>
+  <div class='row'>
+    <form method="post">
+      <div>
+         
+         <a id="registro_b" href="/historico_sabado" class="btn btn-primary" role="button" aria-pressed="true">Visualizar Histórico <br>de Designações </a>
+                <a id="registro_b" href="/desig_coordenador" class="btn btn-secondary" role="button" aria-pressed="true">Designar somente<br> "Nossa Vida"</a>
+                <a id="registro_b" href="/indicadores" class="btn btn-secondary" role="button" aria-pressed="true">Designar somente<br> Indicadores</a>
+                <a id="registro_b" href="/desig_conferencia" class="btn btn-secondary" role="button" aria-pressed="true">Designar somente <br>Conferência Pública</a>
+         </div>
+         <br>
+       {% csrf_token %}
+       <div class="form-row">
+       <div class="form-group col-md-5">
+           {{ sabado.data|as_crispy_field }}
+       </div>    
+           <div class="form-group col-md-5">    
+           {{ sabado.presidente|as_crispy_field }}
+       </div> 
+     </div> 
+     <h5>Conferência Pública</h5>  
+       <div class="form-row">   
+           <div class="form-group col-md-3">    
+           {{ sabado.orador|as_crispy_field }}
+         </div>
+          <div class="form-group col-md-4"> 
+            {{ sabado.congregação|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-5"> 
+         {{ sabado.tema|as_crispy_field }}
+    </div>
+    </div>
+    <h5>Estudo de "A Sentinela"</h5>  
+       <div class="form-row">   
+        <div class="form-group col-md-5">   
+           {{ sabado.leitor_da_Sentinela|as_crispy_field }}
+       </div> 
+     </div>    
+           
+   <h5>Indicadores</h5>   
+        <div class="form-row">
+       <div class="form-group col-md-3">
+       {{ sabado.indicador_Principal|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3">
+       {{ sabado.indicador_Recepção|as_crispy_field }}
+       </div>
+       <div class="form-group col-md-3">
+       {{ sabado.volante_01|as_crispy_field }}
+    </div>
+       <div class="form-group col-md-3">
+       {{ sabado.volante_02|as_crispy_field }}
+    </div>
+   </div> 
+   <input id='registro_b' type="submit" class="btn btn-success" value="Salvar">
+</form>
+</div>
+</div>   
+
+
+{% endblock %}
