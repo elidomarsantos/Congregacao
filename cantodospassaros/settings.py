@@ -27,7 +27,11 @@ SECRET_KEY = 'django-insecure-6jx-7s8cnp(xdlu4_#=h81@mkw523bc2p8ck)^b5zrk2yag5tm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://cantodospassaros.herokuapp.com/']
+ALLOWED_HOSTS = ['cantodospassaros.up.railway.app']
+
+CSRF_TRUSTED_ORIGINS = ['https://cantodospassaros.up.railway.app']
+
+
 
 
 #['https://cantodospassaros.herokuapp.com/']
