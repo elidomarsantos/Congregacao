@@ -8,6 +8,7 @@ ANCIÃOS = (
     ('Elidomar', 'Elidomar'),
     ('Abel', 'Abel'),
     ('Geraldo', 'Geraldo'),
+    ('Isac', 'Isac'),
 )
 
 ANCIÃOS_SERVOS = (
@@ -22,6 +23,10 @@ ANCIÃOS_SERVOS = (
     ('Vanoel', 'Vanoel'),
     ('Samuel', 'Samuel'),
     ('Arnaldo', 'Arnaldo'),
+    ('Paulo Copque', 'Paulo Copque'),
+    ('Joselito','Joselito'),
+    ('Romenil','Romenil'),
+    ('Pierre', 'Pierre'),
 )
 
 INDICADORES = (
@@ -79,6 +84,7 @@ ORAÇÃO = (
     ('Paulo Copque', 'Paulo Copque'),
     ('Pierre', 'Pierre'),
     ('Paulo Moura', 'Paulo Moura'),
+    ('Romenil','Romenil'),
 
 
 )
