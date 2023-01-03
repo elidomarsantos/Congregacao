@@ -54,8 +54,7 @@
           <td>{{ a.email|default_if_none:"&nbsp;" }}</td>
           <td><a href="/contatos/editar_contato/{{a.id}}"><i class="material-icons" data-md-tooltip="Editar">edit</i></a></td>
           <td><a href="/contatos/deletar_contato/{{a.id}}"><i class="material-icons" style=color:crimson data-md-tooltip="Apagar">delete</i></a></td>
-          <td><a href="https://api.whatsapp.com/send?l=pt&amp;phone=55{{ a.telefone }}"><img 
-            src="{% static 'img/wapp.jpg' %}" style="height:40px;" data-selector="img"></a></td>
+        
          </tr>
         {% endfor %} 
    
